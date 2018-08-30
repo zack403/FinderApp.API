@@ -1,0 +1,14 @@
+C:\Users\DE\Desktop\FinderApp\FinderApp.API\bin\Debug\netcoreapp2.1\FinderApp.API.deps.json
+C:\Users\DE\Desktop\FinderApp\FinderApp.API\bin\Debug\netcoreapp2.1\FinderApp.API.runtimeconfig.json
+C:\Users\DE\Desktop\FinderApp\FinderApp.API\bin\Debug\netcoreapp2.1\FinderApp.API.runtimeconfig.dev.json
+C:\Users\DE\Desktop\FinderApp\FinderApp.API\bin\Debug\netcoreapp2.1\FinderApp.API.dll
+C:\Users\DE\Desktop\FinderApp\FinderApp.API\bin\Debug\netcoreapp2.1\FinderApp.API.pdb
+C:\Users\DE\Desktop\FinderApp\FinderApp.API\obj\Debug\netcoreapp2.1\FinderApp.API.csprojAssemblyReference.cache
+C:\Users\DE\Desktop\FinderApp\FinderApp.API\obj\Debug\netcoreapp2.1\FinderApp.API.csproj.CoreCompileInputs.cache
+C:\Users\DE\Desktop\FinderApp\FinderApp.API\obj\Debug\netcoreapp2.1\FinderApp.API.RazorAssemblyInfo.cache
+C:\Users\DE\Desktop\FinderApp\FinderApp.API\obj\Debug\netcoreapp2.1\FinderApp.API.RazorAssemblyInfo.cs
+C:\Users\DE\Desktop\FinderApp\FinderApp.API\obj\Debug\netcoreapp2.1\FinderApp.API.AssemblyInfoInputs.cache
+C:\Users\DE\Desktop\FinderApp\FinderApp.API\obj\Debug\netcoreapp2.1\FinderApp.API.AssemblyInfo.cs
+C:\Users\DE\Desktop\FinderApp\FinderApp.API\obj\Debug\netcoreapp2.1\FinderApp.API.RazorTargetAssemblyInfo.cache
+C:\Users\DE\Desktop\FinderApp\FinderApp.API\obj\Debug\netcoreapp2.1\FinderApp.API.dll
+C:\Users\DE\Desktop\FinderApp\FinderApp.API\obj\Debug\netcoreapp2.1\FinderApp.API.pdb
