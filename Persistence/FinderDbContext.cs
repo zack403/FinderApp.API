@@ -6,6 +6,10 @@ namespace FinderApp.API.Persistence
     public class FinderDbContext : DbContext
     {
         public DbSet<Value> Values { get; set; }
+        public DbSet<User> Users { get; set; }
+
+
+
         public FinderDbContext(DbContextOptions<FinderDbContext> options)
         : base(options)
         {
