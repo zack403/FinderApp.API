@@ -8,14 +8,14 @@ using Microsoft.EntityFrameworkCore;
 namespace FinderApp.API.Controllers
 {
     [Route("/api/value")]
-    
+
     public class ValueController : Controller
     {
         private readonly FinderDbContext context;
-        private readonly IUnitOfWork unitOfWork;
-        public ValueController(FinderDbContext context, IUnitOfWork unitOfWork)
+        private readonly IUnitOfWork unitofwork;
+        public ValueController(FinderDbContext context, IUnitOfWork unitofwork)
         {
-            this.unitOfWork = unitOfWork;
+            this.unitofwork = unitofwork;
             this.context = context;
 
         }
@@ -45,13 +45,13 @@ namespace FinderApp.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var isexist = context.Values.Where(x => x.Name == model.Name.ToLower());
+            var isexist = context.Values.FirstOrDefaultAsync(x => x.Name == model.Name.ToLower());
             if (isexist != null)
             {
                 return BadRequest($"The Name with {model.Name} already exist");
             }
-            context.Values.Add(model);
-            await unitOfWork.CompleteAsync();
+            await context.Values.AddAsync(model);
+            await unitofwork.CompleteAsync();
             return Ok("successfully created");
 
         }
@@ -65,7 +65,7 @@ namespace FinderApp.API.Controllers
             if (ModelState.IsValid)
             {
                 context.Values.Update(value);
-                await unitOfWork.CompleteAsync();
+                await unitofwork.CompleteAsync();
 
             }
             return Ok("Successfully updated");
@@ -80,7 +80,7 @@ namespace FinderApp.API.Controllers
 
             }
             context.Remove(value);
-            await unitOfWork.CompleteAsync();
+            await unitofwork.CompleteAsync();
             return Ok("Successfully deleted");
 
         }
