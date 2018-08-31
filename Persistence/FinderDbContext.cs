@@ -19,6 +19,8 @@ namespace FinderApp.API.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
+            modelbuilder.Entity<User>().Property(x => x.Username).IsRequired();
+            modelbuilder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
 
             modelbuilder.Entity<Value>().HasData(
                 new { Id = 1, Name = "value 1" },

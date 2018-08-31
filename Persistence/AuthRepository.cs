@@ -53,8 +53,6 @@ namespace FinderApp.API.Persistence
             await context.Users.AddAsync(user);
             await unitofwork.CompleteAsync();
             return user;
-
-
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
