@@ -21,9 +21,8 @@ namespace FinderApp.API.Persistence
         {
             var user = await context.Users.FirstOrDefaultAsync(x => x.Username == username);
             if (user == null)
-            {
                 return null;
-            }
+
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
                 return null;
             //auth successful
@@ -32,7 +31,7 @@ namespace FinderApp.API.Persistence
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
             {
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 for (int i = 0; i < computedHash.Length; i++)

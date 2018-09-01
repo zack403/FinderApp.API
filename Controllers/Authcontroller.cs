@@ -1,3 +1,7 @@
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using FinderApp.API.Dtos;
@@ -5,6 +9,7 @@ using FinderApp.API.Model;
 using FinderApp.API.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FinderApp.API.Controllers
 {
@@ -44,6 +49,37 @@ namespace FinderApp.API.Controllers
 
 
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] UserLoginDto userlogindto)
+        {
+            var credentials = await authrepository.Login(userlogindto.Username.ToLower(), userlogindto.Password);
+            if (credentials == null)
+                return Unauthorized();
+
+            //generate token
+            var tokenhandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("super secret key");
+            var tokendescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                        new Claim(ClaimTypes.NameIdentifier, credentials.Id.ToString()),
+                        new Claim(ClaimTypes.Name, credentials.Username)
+
+                }),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+                SecurityAlgorithms.HmacSha512Signature)
+
+            };
+            var token = tokenhandler.CreateToken(tokendescriptor);
+            var tokenString = tokenhandler.WriteToken(token);
+
+            return Ok(new { tokenString });
+
+        }
+
 
 
 

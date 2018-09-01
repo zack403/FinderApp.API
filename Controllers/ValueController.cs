@@ -2,13 +2,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using FinderApp.API.Model;
 using FinderApp.API.Persistence;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinderApp.API.Controllers
 {
+    [Authorize]
     [Route("/api/value")]
-
     public class ValueController : Controller
     {
         private readonly FinderDbContext context;
