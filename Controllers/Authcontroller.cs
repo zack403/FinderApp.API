@@ -53,6 +53,7 @@ namespace FinderApp.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userlogindto)
         {
+
             var credentials = await authrepository.Login(userlogindto.Username.ToLower(), userlogindto.Password);
             if (credentials == null)
                 return Unauthorized();

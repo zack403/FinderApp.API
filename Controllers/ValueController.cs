@@ -8,7 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinderApp.API.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
+    // [Authorize]
     [Route("/api/value")]
     public class ValueController : Controller
     {
