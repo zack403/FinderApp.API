@@ -28,7 +28,9 @@ namespace FinderApp.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserForRegisterDto userregisterdto)
         {
-            userregisterdto.Username = userregisterdto.Username.ToLower();
+            if (!string.IsNullOrEmpty(userregisterdto.Username))
+                userregisterdto.Username = userregisterdto.Username.ToLower();
+
             if (await authrepository.UserExists(userregisterdto.Username))
                 ModelState.AddModelError("Username", "already exist Try a different username");
 
@@ -53,6 +55,7 @@ namespace FinderApp.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userlogindto)
         {
+             throw new Exception("computer says no");
 
             var credentials = await authrepository.Login(userlogindto.Username.ToLower(), userlogindto.Password);
             if (credentials == null)
@@ -78,7 +81,6 @@ namespace FinderApp.API.Controllers
             var tokenString = tokenhandler.WriteToken(token);
 
             return Ok(new { tokenString });
-
         }
 
 
