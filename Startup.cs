@@ -38,6 +38,7 @@ namespace FinderApp.API
         {
             // services.AddAutoMapper();
 
+            services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddDbContext<FinderDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("Default")));
@@ -66,7 +67,7 @@ namespace FinderApp.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -90,8 +91,9 @@ namespace FinderApp.API
                     });
                 });
             }
+            //cooment out after first app run to disable continous population of ur database
 
-
+            //seeder.SeedUsers();
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseCors("CorsPolicy");

@@ -55,11 +55,10 @@ namespace FinderApp.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userlogindto)
         {
-             throw new Exception("computer says no");
 
             var credentials = await authrepository.Login(userlogindto.Username.ToLower(), userlogindto.Password);
             if (credentials == null)
-                return Unauthorized();
+                return NotFound("invalid login details");
 
             //generate token
             var tokenhandler = new JwtSecurityTokenHandler();
