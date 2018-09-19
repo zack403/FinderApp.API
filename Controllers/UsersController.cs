@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FinderApp.API.Controllers
 {
-    [Authorize]
+     [Authorize]
     [Route("api/user")]
     public class UsersController : Controller
     {

@@ -58,7 +58,7 @@ namespace FinderApp.API.Controllers
 
             var credentials = await authrepository.Login(userlogindto.Username.ToLower(), userlogindto.Password);
             if (credentials == null)
-                return NotFound("invalid login details");
+                return BadRequest(  "invalid login details" );
 
             //generate token
             var tokenhandler = new JwtSecurityTokenHandler();
