@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using FinderApp.API.Dtos;
@@ -31,13 +33,31 @@ namespace FinderApp.API.Controllers
         }
 
         [HttpGet("{id}")]
-
         public async Task<IActionResult> GetUsersById(int id)
         {
             var user = await repository.GetUser(id);
             var userToreturn = mapper.Map<UserDetailedDto>(user);
             return Ok(userToreturn);
+        }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] UserUpdateDto userupdateDto)
+        {   if(!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await repository.GetUser(id);
+            if(userFromRepo == null)
+            return NotFound($"The user with ID {id} does not exist");
+
+            if(currentUserId != userFromRepo.Id)
+            return Unauthorized();
+            mapper.Map(userupdateDto, userFromRepo);
+
+            if (await repository.SaveAll())
+            return NoContent();
+            throw new Exception($"updating user {id} failed on save");
         }
 
     }

@@ -26,6 +26,7 @@ namespace FinderApp.API.Mapping
                 opt.ResolveUsing(src => src.DateOfBirth.CalculateAge());
             });
             CreateMap<Photo, PhotosDto>();
+            CreateMap<UserUpdateDto, User>();
         }
 
     }
