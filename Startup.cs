@@ -53,6 +53,7 @@ namespace FinderApp.API
                 .AllowAnyMethod()
                 .AllowCredentials());
             });
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {

@@ -27,6 +27,9 @@ namespace FinderApp.API.Mapping
             });
             CreateMap<Photo, PhotosDto>();
             CreateMap<UserUpdateDto, User>();
+
+            CreateMap<PhotoCreationDto, Photo>();
+            CreateMap<Photo, PhotoReturnDto>();
         }
 
     }

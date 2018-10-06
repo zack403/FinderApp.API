@@ -18,8 +18,10 @@ namespace FinderApp.API.Controllers
     {
         private readonly IUnitOfWork unitofwork;
         private readonly IAuthRepository authrepository;
-        public Authcontroller(IUnitOfWork unitofwork, IAuthRepository authrepository)
+        private readonly IMapper mapper;
+        public Authcontroller(IUnitOfWork unitofwork, IAuthRepository authrepository, IMapper mapper)
         {
+            this.mapper = mapper;
             this.authrepository = authrepository;
             this.unitofwork = unitofwork;
 
@@ -56,8 +58,8 @@ namespace FinderApp.API.Controllers
         public async Task<IActionResult> Login([FromBody] UserLoginDto userlogindto)
         {
 
-            var credentials = await authrepository.Login(userlogindto.Username.ToLower(), userlogindto.Password);
-            if (credentials == null)
+            var userFromRepo = await authrepository.Login(userlogindto.Username.ToLower(), userlogindto.Password);
+            if (userFromRepo == null)
                 return BadRequest("Login failed, username or password incorrect");
 
             //generate token
@@ -67,8 +69,8 @@ namespace FinderApp.API.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                        new Claim(ClaimTypes.NameIdentifier, credentials.Id.ToString()),
-                        new Claim(ClaimTypes.Name, credentials.Username)
+                        new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
+                        new Claim(ClaimTypes.Name, userFromRepo.Username)
 
                 }),
                 Expires = DateTime.Now.AddDays(1),
@@ -79,7 +81,9 @@ namespace FinderApp.API.Controllers
             var token = tokenhandler.CreateToken(tokendescriptor);
             var tokenString = tokenhandler.WriteToken(token);
 
-            return Ok(new { tokenString });
+            var user = mapper.Map<UserDetailedDto>(userFromRepo)
+
+            return Ok(new { tokenString, user });
         }
 
 

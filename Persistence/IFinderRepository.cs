@@ -8,10 +8,14 @@ namespace FinderApp.API.Persistence
     {
          void Add<T>(T entity) where T: class;
          void Delete<T>(T entity) where T: class;
-         Task<bool> SaveAll();
+         Task<bool> CompleteAsync();
 
          Task<IEnumerable<User>> GetUsers();
          Task<User> GetUser(int id);
+
+         Task<Photo> GetPhoto(int id);
+
+         Task<Photo> GetIsMainPhotoForUser(int userId);
 
     }
 }

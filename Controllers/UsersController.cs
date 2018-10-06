@@ -15,7 +15,6 @@ namespace FinderApp.API.Controllers
     [Route("api/user")]
     public class UsersController : Controller
     {
-        private readonly FinderDbContext context;
         private readonly IFinderRepository repository;
         private readonly IMapper mapper;
         public UsersController(IFinderRepository repository, IMapper mapper)
@@ -55,7 +54,7 @@ namespace FinderApp.API.Controllers
             return Unauthorized();
             mapper.Map(userupdateDto, userFromRepo);
 
-            if (await repository.SaveAll())
+            if (await repository.CompleteAsync())
             return NoContent();
             throw new Exception($"updating user {id} failed on save");
         }
