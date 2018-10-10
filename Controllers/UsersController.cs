@@ -31,7 +31,7 @@ namespace FinderApp.API.Controllers
             return Ok(userToReturn);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetUSer")]
         public async Task<IActionResult> GetUsersById(int id)
         {
             var user = await repository.GetUser(id);

@@ -24,7 +24,6 @@ namespace FinderApp.API.Controllers
             this.mapper = mapper;
             this.authrepository = authrepository;
             this.unitofwork = unitofwork;
-
         }
 
         [HttpPost("register")]
@@ -34,7 +33,7 @@ namespace FinderApp.API.Controllers
                 userregisterdto.Username = userregisterdto.Username.ToLower();
 
             if (await authrepository.UserExists(userregisterdto.Username))
-                ModelState.AddModelError("Username", "already exist Try a different username");
+                return BadRequest("username already taken, Try a different username");
 
             //validate request
             if (!ModelState.IsValid)
@@ -42,14 +41,16 @@ namespace FinderApp.API.Controllers
                 return BadRequest(ModelState);
             }
 
-
-            var usertocreate = new User
-            {
-                Username = userregisterdto.Username
-            };
+            var usertocreate = mapper.Map<User>(userregisterdto);
 
             var createduser = await authrepository.Register(usertocreate, userregisterdto.Password);
-            return Ok($"User {usertocreate.Username} successfully created!");
+            var userToReturn = mapper.Map<UserDetailedDto>(createduser);
+
+
+            return CreatedAtRoute("GetUser", new {controller = "user", id = usertocreate.Id}, userToReturn);
+
+            //return Ok($"User {usertocreate.Username} successfully created!");
+
 
 
         }
@@ -81,7 +82,7 @@ namespace FinderApp.API.Controllers
             var token = tokenhandler.CreateToken(tokendescriptor);
             var tokenString = tokenhandler.WriteToken(token);
 
-            var user = mapper.Map<UserDetailedDto>(userFromRepo)
+            var user = mapper.Map<UserDetailedDto>(userFromRepo);
 
             return Ok(new { tokenString, user });
         }

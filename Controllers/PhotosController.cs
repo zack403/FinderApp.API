@@ -73,9 +73,9 @@ namespace FinderApp.API.Controllers
                    //specify the upload parameters
                     var uploadParams = new ImageUploadParams()
                     {
-                        File = new FileDescription(file.Name, stream)
+                        File = new FileDescription(file.Name, stream),
                         //apply transformation so that when we upload it automatically crops the photo and provides an image that centers around the face
-                        Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face"); 
+                        Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face") 
                     };
                     uploadResult = _cloudinary.Upload(uploadParams);
                }
@@ -137,7 +137,7 @@ namespace FinderApp.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePhoto(int userdId, int id)
+        public async Task<IActionResult> DeletePhoto(int userId, int id)
         {
              if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             return Unauthorized();
@@ -154,26 +154,24 @@ namespace FinderApp.API.Controllers
                 
             var deleteParams = new DeletionParams(photoFromRepo.PublicId);
 
-            var result = cloudinary.Destroy(deleteParams);
+            var result = _cloudinary.Destroy(deleteParams);
 
-            if (result.Result = "ok")
-                repository.delete(photoFromRepo);
+            if (result.Result == "ok")
+                repository.Delete(photoFromRepo);
             }
 
             if(photoFromRepo.PublicId == null)
             {
-                repository.delete(photoFromRepo);
+                repository.Delete(photoFromRepo);
             }
             
-            if (await.CompleteAsync)
+            if (await repository.CompleteAsync())
              return Ok("successfully deleted");
 
 
-             return BadRequest("Error while deleting photo")
+             return BadRequest("Error while deleting photo");
 
-            
-          
-            
+                
         }
 
     }
