@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using FinderApp.API.Dtos;
+using FinderApp.API.Helpers;
 using FinderApp.API.Model;
 using FinderApp.API.Persistence;
 using Microsoft.AspNetCore.Mvc;

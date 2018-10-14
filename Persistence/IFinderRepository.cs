@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FinderApp.API.Helpers;
 using FinderApp.API.Model;
 
 namespace FinderApp.API.Persistence
@@ -10,12 +11,14 @@ namespace FinderApp.API.Persistence
          void Delete<T>(T entity) where T: class;
          Task<bool> CompleteAsync();
 
-         Task<IEnumerable<User>> GetUsers();
+         Task<PagedList<User>> GetUsers(UserParams userparams);
          Task<User> GetUser(int id);
 
          Task<Photo> GetPhoto(int id);
 
          Task<Photo> GetIsMainPhotoForUser(int userId);
+
+         Task<Like> GetLike(int userId, int recipientId);
 
     }
 }

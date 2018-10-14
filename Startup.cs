@@ -66,6 +66,7 @@ namespace FinderApp.API
                 };
 
             });
+            services.AddScoped<LogUserActivity>();
 
         }
 
