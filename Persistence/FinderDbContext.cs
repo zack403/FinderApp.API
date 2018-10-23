@@ -9,6 +9,8 @@ namespace FinderApp.API.Persistence
         public DbSet<User> Users { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Like> Likes { get; set; }
+        public DbSet<Message> Messages { get; set; }
+
 
 
 
@@ -41,11 +43,16 @@ namespace FinderApp.API.Persistence
             .HasForeignKey(u => u.LikeeId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        //     modelbuilder.Entity<Value>().HasData(
-        //         new { Id = 1, Name = "value 1" },
-        //         new { Id = 2, Name = "Value 2" },
-        //         new { Id = 3, Name = "Value 3" }
-        //  );
+            modelbuilder.Entity<Message>()
+            .HasOne(x => x.Sender)
+            .WithMany(x => x.MessagesSent)
+            .OnDelete(DeleteBehavior.Restrict);
+
+            modelbuilder.Entity<Message>()
+            .HasOne(x => x.Recipient)
+            .WithMany(x => x.MessagesRecieved)
+            .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

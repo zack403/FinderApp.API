@@ -32,6 +32,15 @@ namespace FinderApp.API.Mapping
             CreateMap<Photo, PhotoReturnDto>();
 
             CreateMap<UserForRegisterDto, User>();
+
+            CreateMap<MessageCreationDto, Message >();
+
+            CreateMap<Message, MessageToReturnDto>()
+            .ForMember(m => m.SenderPhotoUrl, opt =>
+            opt.MapFrom(u => u.Sender.Photos.FirstOrDefault( f => f.IsMain).url))
+
+            .ForMember(m => m.RecipientPhotoUrl, opt =>
+            opt.MapFrom(u => u.Recipient.Photos.FirstOrDefault( f => f.IsMain).url));
         }
 
     }

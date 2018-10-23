@@ -19,6 +19,10 @@ namespace FinderApp.API.Persistence
          Task<Photo> GetIsMainPhotoForUser(int userId);
 
          Task<Like> GetLike(int userId, int recipientId);
+         Task<Message> GetMessage(int id);
+         Task<PagedList<Message>> GetMessagesForUser(MessageParams messageparams);
+         Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId);
+
 
     }
 }

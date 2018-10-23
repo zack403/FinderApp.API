@@ -74,7 +74,6 @@ namespace FinderApp.API.Controllers
 
 
         [HttpPost("{id}/like/{recipientId}")]
-
         public async Task<IActionResult> LikeUser(int id, int recipientId)
         {
             if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
