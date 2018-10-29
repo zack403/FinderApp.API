@@ -100,8 +100,15 @@ namespace FinderApp.API
             //seeder.SeedUsers();
             app.UseHttpsRedirection();
             app.UseAuthentication();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseCors("CorsPolicy");
-            app.UseMvc();
+            app.UseMvc(routes => {
+                routes.MapSpaFallbackRoute(
+                    name : "spa-fallbacl",
+                    defaults: new {controller = "Fallback", action = "Index"}
+                );
+            });
         }
     }
 }

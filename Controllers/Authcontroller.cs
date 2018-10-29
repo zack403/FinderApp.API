@@ -48,7 +48,7 @@ namespace FinderApp.API.Controllers
             var userToReturn = mapper.Map<UserDetailedDto>(createduser);
 
 
-            return CreatedAtRoute("GetUser", new {controller = "user", id = usertocreate.Id}, userToReturn);
+            return CreatedAtRoute("GetUser", new {message = "Account created successfully",controller = "user", id = usertocreate.Id}, userToReturn);
 
             //return Ok($"User {usertocreate.Username} successfully created!");
 
@@ -59,7 +59,6 @@ namespace FinderApp.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userlogindto)
         {
-
             var userFromRepo = await authrepository.Login(userlogindto.Username.ToLower(), userlogindto.Password);
             if (userFromRepo == null)
                 return BadRequest("Login failed, username or password incorrect");
@@ -85,7 +84,7 @@ namespace FinderApp.API.Controllers
 
             var user = mapper.Map<UserDetailedDto>(userFromRepo);
 
-            return Ok(new { tokenString, user });
+            return Ok(new { message="Login was successful", tokenString, user });
         }
 
 

@@ -166,7 +166,7 @@ namespace FinderApp.API.Controllers
             }
             
             if (await repository.CompleteAsync())
-             return Ok("successfully deleted");
+             return Ok();
 
 
              return BadRequest("Error while deleting photo");

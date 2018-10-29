@@ -95,7 +95,7 @@ namespace FinderApp.API.Controllers
 
              repository.Add<Like>(like);
              if(await repository.CompleteAsync())
-             return Ok();
+             return Ok(new {});
 
              return BadRequest("Failed to add user");
         }

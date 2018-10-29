@@ -93,7 +93,7 @@ namespace FinderApp.API.Persistence
             }else {
                 return user.Likee.Where(u => u.LikerId == id);
             }
-        }
+        } 
 
         public async Task<bool> CompleteAsync()
         {
