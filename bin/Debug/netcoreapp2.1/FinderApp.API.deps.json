@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "3c6915e54ebe77b92bcd353c95defb2a803afc16"
+    "signature": "2623af99bb0c3338ca909274a1cf9e76dfb33aef"
   },
   "compilationOptions": {
     "defines": [
@@ -32,7 +32,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "2.1.2",
           "Microsoft.EntityFrameworkCore.Sqlite": "2.2.0-preview1-35029",
           "Microsoft.EntityFrameworkCore.Tools.DotNet": "2.1.0-preview1-final",
-          "Microsoft.NETCore.App": "2.1.0"
+          "Microsoft.NETCore.App": "2.1.0",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "2.2.0-preview1"
         },
         "runtime": {
           "FinderApp.API.dll": {}
@@ -537,6 +538,39 @@
       "NETStandard.Library/2.0.3": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.1.0"
+        }
+      },
+      "Npgsql/4.0.3": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "4.5.1",
+          "System.Threading.Tasks.Extensions": "4.5.1",
+          "System.ValueTuple": "4.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Npgsql.dll": {
+            "assemblyVersion": "4.0.3.0",
+            "fileVersion": "4.0.3.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Npgsql.dll": {}
+        }
+      },
+      "Npgsql.EntityFrameworkCore.PostgreSQL/2.2.0-preview1": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "2.2.0-preview1-35029",
+          "Microsoft.EntityFrameworkCore.Abstractions": "2.2.0-preview1-35029",
+          "Microsoft.EntityFrameworkCore.Relational": "2.2.0-preview1-35029",
+          "Npgsql": "4.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {}
         }
       },
       "Remotion.Linq/2.2.0": {
@@ -3666,6 +3700,20 @@
       "sha512": "sha512-st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
       "path": "netstandard.library/2.0.3",
       "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
+    },
+    "Npgsql/4.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kI2cGnKNexseCVn4a8EWA0gz2pXJOrkV9snlSb4How77a5uOu5oILv1FgBxteI2R0FgKfjXnnJnqmEuyAMNG3g==",
+      "path": "npgsql/4.0.3",
+      "hashPath": "npgsql.4.0.3.nupkg.sha512"
+    },
+    "Npgsql.EntityFrameworkCore.PostgreSQL/2.2.0-preview1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bXZBzFZY/qtPbNYtVEd+6Vs8ZJuIqoDnMat8xMWJmBnc2UrZs2D9GiI2Z+WQJ6z4smQ0+04T34JH3LY0T7KTjQ==",
+      "path": "npgsql.entityframeworkcore.postgresql/2.2.0-preview1",
+      "hashPath": "npgsql.entityframeworkcore.postgresql.2.2.0-preview1.nupkg.sha512"
     },
     "Remotion.Linq/2.2.0": {
       "type": "package",

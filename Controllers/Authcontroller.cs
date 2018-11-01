@@ -74,7 +74,7 @@ namespace FinderApp.API.Controllers
                         new Claim(ClaimTypes.Name, userFromRepo.Username)
 
                 }),
-                Expires = DateTime.Now.AddDays(1),
+                Expires = DateTime.Now.AddMinutes(15),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha512Signature)
 

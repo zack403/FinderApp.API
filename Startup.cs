@@ -41,7 +41,9 @@ namespace FinderApp.API
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IFinderRepository, FinderRepository>();
-            services.AddDbContext<FinderDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("Default")));
+            //  services.AddDbContext<FinderDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("Default")));
+             // EF Core for postgres configuration
+             services.AddEntityFrameworkNpgsql().AddDbContext<FinderDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Default")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
@@ -105,7 +107,7 @@ namespace FinderApp.API
             app.UseCors("CorsPolicy");
             app.UseMvc(routes => {
                 routes.MapSpaFallbackRoute(
-                    name : "spa-fallbacl",
+                    name : "spa-fallback",
                     defaults: new {controller = "Fallback", action = "Index"}
                 );
             });
